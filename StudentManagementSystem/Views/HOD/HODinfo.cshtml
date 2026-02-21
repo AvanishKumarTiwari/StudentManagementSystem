@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "HODinfo";
+}
+
+
+    <style>
+        body {
+            background: linear-gradient(135deg,#4e73df,#1cc88a);
+            min-height: 100vh;
+        }
+
+        .register-card {
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh;">
+
+        <div class="col-md-6">
+            <div class="card register-card">
+
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>HOD Registration</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form>
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Full Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text" class="form-control" placeholder="Enter Employee ID">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select">
+                                <option selected>Select Department</option>
+                                <option>CSE</option>
+                                <option>IT</option>
+                                <option>ECE</option>
+                                <option>ME</option>
+                                <option>CE</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" placeholder="Enter Email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Phone Number">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Enter Password">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="Confirm Password">
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Register HOD</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="card-footer text-center">
+                    Already Registered? <a href="#">Login</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+

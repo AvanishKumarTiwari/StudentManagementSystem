@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StudentManagementSystem.Models.User>
+@{
+    ViewData["Title"] = "GetAllUsers";
+}
+
+
+
+
+<div class="container">
+
+    <div class="card table-card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Student List</h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped align-middle text-center">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ID</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Course</td>
+                                <td>@item.Sem</td>
+                                <td>@item.Phone</td>
+                               
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

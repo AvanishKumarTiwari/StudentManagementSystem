@@ -1,0 +1,141 @@
+﻿@using StudentManagementSystem.Models
+@model User
+@{
+    ViewData["Title"] = "CreateUser";
+}
+
+<style>
+    body {
+        background: #f5f7fa;
+    }
+
+    .register-card {
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+</style>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <div class="card register-card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>Student Registration</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name" asp-for="FirstName">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Last Name" asp-for="Lastname">
+                                <span asp-validation-for="Lastname" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="Enter Email" asp-for="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Dob</label>
+                                <input type="date" class="form-control" placeholder="" asp-for="DoB">
+                                <span asp-validation-for="DoB" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control" placeholder="Enter Phone Number" asp-for="Phone">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Course</label>
+                                <select class="form-select" asp-for="Course">
+                                    <option value="">Select Course</option>
+                                    <option value="B-Tech">B.Tech</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="MCA">MCA</option>
+                                    <option value="B.Sc">B.Sc</option>
+                                </select>
+                                <span asp-validation-for="Course" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Semester</label>
+                                <select class="form-select" asp-for="Sem">
+                                    <option value="">Select Semester</option>
+                                    <option value="1"> 1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
+                                <span asp-validation-for="Sem" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea class="form-control" rows="3" asp-for="Address"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="Enter Password" asp-for="Password">
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm Password" asp-for="ConfirmPassword">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+
+                            <input type="submit" value="Register" class="btn btn-primary" />
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+@{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
