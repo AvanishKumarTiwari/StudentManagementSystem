@@ -12,5 +12,6 @@ namespace StudentManagementSystem.Models
         public DbSet<User> Users { get; set; }      // table 
 
         //Add
+        public DbSet<HOD> HOD{ get; set; }
     }
 }
