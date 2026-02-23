@@ -33,5 +33,6 @@ namespace StudentManagementSystem.Controllers
             var res = _db.HOD.ToList();
             return View(res);
         }
+        
     }
 }

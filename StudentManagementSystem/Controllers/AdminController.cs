@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Core.Infrastructure;
 using StudentManagementSystem.Models;
 
 namespace StudentManagementSystem.Controllers
@@ -46,5 +47,12 @@ namespace StudentManagementSystem.Controllers
         {
             return View();
         }
+
+        public IActionResult Products() 
+        {
+            return View();
+        }
+
+        
     }
 }
