@@ -120,7 +120,8 @@
 
                         <div class="d-grid">
 
-                            <input type="submit" value="Register" class="btn btn-primary" />
+                            <input type="submit" value="Register" class="btn btn-primary mb-5" />
+                            <a class="btn btn-primary" asp-controller="Admin" asp-action="adminlogin">Login</a>
 
                         </div>
 
@@ -134,8 +135,8 @@
 </div>
 
 
-@section Scripts{
-@{
+@section Scripts {
+    @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

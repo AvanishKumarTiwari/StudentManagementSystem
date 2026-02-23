@@ -33,5 +33,18 @@ namespace StudentManagementSystem.Controllers
            var res = _db.Users.ToList();
             return View(res);
         }
+
+        public IActionResult AdminLogin() {
+            return View();
+        }
+
+        public IActionResult AdminDashboard()
+        {
+            return View();
+        }
+        public IActionResult Studentdashboard()
+        {
+            return View();
+        }
     }
 }
