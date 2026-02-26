@@ -2,7 +2,158 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Styles {
+    <style>
+        /* Hero */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg,#2b6cb0 0%, #2f855a 100%);
+            color: #fff;
+        }
+
+        .hero-inner { position: relative; z-index: 2; }
+
+        .hero .subtitle { color: rgba(255,255,255,0.9); font-size:1.05rem; }
+
+        /* floating illusion shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(18px);
+            opacity: 0.75;
+            transform: translate3d(0,0,0);
+            will-change: transform, opacity;
+        }
+
+        .shape.s1 { width: 360px; height: 360px; background: rgba(255,255,255,0.06); top: -80px; right: -80px; }
+        .shape.s2 { width: 220px; height: 220px; background: rgba(255,255,255,0.04); bottom: -40px; left: -40px; }
+        .shape.s3 { width: 120px; height: 120px; background: rgba(255,255,255,0.08); top: 40%; left: 60%; }
+
+        /* Feature cards */
+        .features { margin-top: 32px; }
+
+        .feature-card {
+            background: rgba(255,255,255,0.98);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(12,20,40,0.08);
+            transition: transform 250ms ease, box-shadow 250ms ease;
+            transform-style: preserve-3d;
+        }
+
+        .feature-card:hover { transform: translateY(-8px) rotateX(4deg); box-shadow: 0 18px 40px rgba(12,20,40,0.12); }
+
+        .feature-icon { font-size: 34px; color: #2b6cb0; }
+
+        /* responsive tweaks */
+        @@media (max-width: 767px) {
+            .hero { padding: 40px 0; }
+            .shape.s1 { display:none; }
+        }
+    </style>
+}
+
+<section class="hero">
+    <div class="shape s1" data-move-factor="-15"></div>
+    <div class="shape s2" data-move-factor="10"></div>
+    <div class="shape s3" data-move-factor="6"></div>
+
+    <div class="container hero-inner">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-white">
+                <h1 class="display-4 fw-bold">Smart Student Management</h1>
+                <p class="subtitle">Manage students, admins and courses from a single responsive dashboard with quick actions and insights.</p>
+
+                <div class="mt-4">
+                    <a class="btn btn-light btn-lg me-2" asp-controller="Admin" asp-action="AdminLogin">
+                        <i class="bi bi-box-arrow-in-right"></i> Admin Login
+                    </a>
+                    <a class="btn btn-outline-light btn-lg" asp-controller="Admin" asp-action="AdminRegister">Register</a>
+                </div>
+            </div>
+
+            <div class="col-lg-6 text-center d-none d-lg-block">
+                <div class="card" style="border-radius:14px; overflow:hidden; display:inline-block;">
+                    @* <img src="https://via.placeholder.com/760x420?text=Dashboard+Preview" alt="preview" class="img-fluid" style="display:block;"> *@
+                </div>
+            </div>
+        </div>
+
+        <div class="row features">
+            <div class="col-md-4 mb-3">
+                <div class="feature-card text-center">
+                    <i class="bi bi-people-fill feature-icon"></i>
+                    <h5 class="mt-3">Users</h5>
+                    <p class="text-muted">Create and manage students, admins and HODs.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-card text-center">
+                    <i class="bi bi-box-seam feature-icon text-success"></i>
+                    <h5 class="mt-3">Products</h5>
+                    <p class="text-muted">Inventory and course materials tracking.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="feature-card text-center">
+                    <i class="bi bi-bar-chart-line feature-icon text-info"></i>
+                    <h5 class="mt-3">Insights</h5>
+                    <p class="text-muted">Quick stats and visual reports.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end container -->
+</section>
+
+@section Scripts {
+    <script>
+        // small parallax illusion for floating shapes
+        (function(){
+            const hero = document.querySelector('.hero');
+            if(!hero) return;
+            const shapes = hero.querySelectorAll('.shape');
+
+            function onMove(e){
+                const rect = hero.getBoundingClientRect();
+                const cx = rect.left + rect.width/2;
+                const cy = rect.top + rect.height/2;
+                const pointerX = (e.clientX || (e.touches && e.touches[0].clientX)) || cx;
+                const pointerY = (e.clientY || (e.touches && e.touches[0].clientY)) || cy;
+                const dx = (pointerX - cx) / rect.width;
+                const dy = (pointerY - cy) / rect.height;
+
+                shapes.forEach(s => {
+                    const f = parseFloat(s.dataset.moveFactor) || 6;
+                    const tx = dx * f * -1;
+                    const ty = dy * f * -1;
+                    s.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+                });
+            }
+
+            hero.addEventListener('mousemove', onMove);
+            hero.addEventListener('touchmove', onMove, {passive:true});
+        })();
+
+        // simple tilt effect for feature cards
+        (function(){
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', function(e){
+                    const r = card.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width;
+                    const py = (e.clientY - r.top) / r.height;
+                    const rx = (py - 0.5) * 6; // rotateX
+                    const ry = (px - 0.5) * -6; // rotateY
+                    card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+                });
+                card.addEventListener('mouseleave', function(){
+                    card.style.transform = '';
+                });
+            });
+        })();
+    </script>
+}

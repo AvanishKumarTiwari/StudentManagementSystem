@@ -3,13 +3,14 @@ using StudentManagementSystem.Models;
 
 namespace StudentManagementSystem.Controllers
 {
+    [StudentManagementSystem.Filters.DemoAuthorize]
     public class HODController : Controller
     {
 
-        public AppDb _db;
-        public HODController()
+        private readonly AppDb _db;
+        public HODController(AppDb db)
         {
-            _db = new AppDb();
+            _db = db;
         }
         [HttpGet]
         public IActionResult HODinfo()

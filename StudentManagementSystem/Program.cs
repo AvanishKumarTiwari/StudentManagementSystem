@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace StudentManagementSystem
 {
     public class Program
@@ -8,6 +10,11 @@ namespace StudentManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Configure EF Core DbContext using ConnectionStrings:DefaultConnection
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<StudentManagementSystem.Models.AppDb>(options =>
+                options.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
@@ -28,7 +35,7 @@ namespace StudentManagementSystem
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Admin}/{action=AdminLogin}/{id?}");
 
             app.Run();
         }
