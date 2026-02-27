@@ -1,0 +1,39 @@
+@model StudentManagementSystem.Models.Admin
+
+@{
+    ViewData["Title"] = "EditAdmin";
+}
+
+<h3>Edit Admin</h3>
+
+<form method="post" asp-action="EditAdmin">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="FullName" class="form-control" />
+        @Html.ValidationMessageFor(m => m.FullName)
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" type="password" />
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <div class="d-grid">
+        <button class="btn btn-primary">Save</button>
+    </div>
+</form>

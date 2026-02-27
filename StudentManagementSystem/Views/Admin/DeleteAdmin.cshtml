@@ -1,0 +1,19 @@
+@model StudentManagementSystem.Models.Admin
+
+@{
+    ViewData["Title"] = "DeleteAdmin";
+}
+
+<h3>Delete Admin</h3>
+
+<div class="card p-3">
+    <p>Are you sure you want to delete <strong>@Model.FullName</strong>?</p>
+    <form method="post" asp-action="DeleteAdmin">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="GetAllAdmins" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

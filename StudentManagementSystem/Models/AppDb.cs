@@ -12,5 +12,6 @@ namespace StudentManagementSystem.Models
 
         //Add
         public DbSet<HOD> HOD{ get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 }

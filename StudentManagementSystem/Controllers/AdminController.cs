@@ -45,7 +45,16 @@ namespace StudentManagementSystem.Controllers
             return View(res);
         }
 
+        [HttpGet]
+        public IActionResult GetAllAdmins()
+        {
+            var res = _db.Admins.ToList();
+            return View(res);
+        }
+
         public IActionResult AdminLogin() {
+            // if already authenticated redirect to dashboard
+            if (IsAuthenticated()) return RedirectToAction("AdminDashboard");
             return View();
         }
 
@@ -104,7 +113,7 @@ namespace StudentManagementSystem.Controllers
                     Expires = DateTimeOffset.UtcNow.AddHours(8)
                 });
 
-                return RedirectToAction("AdminDashboard");
+                return RedirectToAction("AdminDashboard", "Admin");
             }
             else if (role.Equals("HOD", StringComparison.OrdinalIgnoreCase))
             {
@@ -115,7 +124,7 @@ namespace StudentManagementSystem.Controllers
                     Expires = DateTimeOffset.UtcNow.AddHours(8)
                 });
 
-                return RedirectToAction("Studentdashboard");
+                return RedirectToAction("Studentdashboard", "Admin");
             }
 
             // default
@@ -152,6 +161,63 @@ namespace StudentManagementSystem.Controllers
         public IActionResult Users()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateAdmin(Admin data)
+        {
+            if (!ModelState.IsValid) return View(data);
+
+            _db.Admins.Add(data);
+            _db.SaveChanges();
+
+            return RedirectToAction("GetAllAdmins");
+        }
+
+        [HttpGet]
+        public IActionResult EditAdmin(int id)
+        {
+            var admin = _db.Admins.Find(id);
+            if (admin == null) return NotFound();
+            return View(admin);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditAdmin(Admin data)
+        {
+            if (!ModelState.IsValid) return View(data);
+            _db.Admins.Update(data);
+            _db.SaveChanges();
+            return RedirectToAction("GetAllAdmins");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteAdmin(int id)
+        {
+            var admin = _db.Admins.Find(id);
+            if (admin == null) return NotFound();
+            return View(admin);
+        }
+
+        [HttpPost, ActionName("DeleteAdmin")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteAdminConfirmed(int id)
+        {
+            var admin = _db.Admins.Find(id);
+            if (admin != null)
+            {
+                _db.Admins.Remove(admin);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("GetAllAdmins");
         }
     }
 }

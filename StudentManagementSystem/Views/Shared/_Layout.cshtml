@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>    
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -124,15 +124,24 @@
 
                 
 
-                <a class="@(IsActive("Home", "Index") ? "active sidebar-link" : "sidebar-link")" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-speedometer2"></i> Dashboard
-                </a>
+                @if (!string.IsNullOrEmpty(authRole))
+                {
+                    <a class="@(IsActive("Admin", "AdminDashboard") ? "active sidebar-link" : "sidebar-link")" asp-controller="Admin" asp-action="AdminDashboard">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                }
+                else
+                {
+                    <a class="@(IsActive("Home", "Index") ? "active sidebar-link" : "sidebar-link")" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                }
 
                 <a class="@(IsActive("Admin", "Users") ? "active sidebar-link" : "sidebar-link")" asp-controller="Admin" asp-action="Users">
                     <i class="bi bi-people"></i> Users
                 </a>
 
-                <a class="sidebar-link" href="#"><i class="bi bi-person-badge"></i> Admins</a>
+                <a class="@(IsActive("Admin", "GetAllAdmins") ? "active sidebar-link" : "sidebar-link")" asp-controller="Admin" asp-action="GetAllAdmins"><i class="bi bi-person-badge"></i> Admins</a>
 
                 <a class="@(IsActive("Admin", "Products") ? "active sidebar-link" : "sidebar-link")" asp-controller="Admin" asp-action="Products">
                     <i class="bi bi-box"></i> Products
